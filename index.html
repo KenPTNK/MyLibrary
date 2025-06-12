@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Euler Library</title>
+    <link rel="stylesheet" href="/style/style.css" />
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-inner">
+            <h1 class="logo">📚 Euler Library</h1>
+            <div class="search-group">
+                <input type="text" id="search-title" placeholder="Tên sách..." />
+                <input type="text" id="search-author" placeholder="Tác giả..." />
+                <button id="search-btn">Tìm kiếm</button>
+            </div>
+            <nav class="nav">
+                <a href="#">Trang chủ</a>
+                <a href="#">Sách bán</a>
+                <a href="#">Cho thuê</a>
+                <a href="#">Liên hệ</a>
+                <a href="/login.html" class="login-btn">Đăng nhập</a>
+                <a href="#" class="logout-btn hidden" onclick="reload()">Đăng xuất</a>
+                <div class="user-card hidden">
+                    <div class="username hidden" id="username"></div>
+                    <img class="avatar hidden" id="avatar" src="" alt="User Avatar">
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <section class="banner">
+        <div class="container">
+            <h2>Khám phá tri thức – Thuê và đọc sách dễ dàng!</h2>
+            <p>Hơn 10,000 đầu sách đa lĩnh vực từ khoa học đến văn học</p>
+        </div>
+    </section>
+
+    <!-- Book Grid -->
+    <section class="container book-grid">
+        <!-- <div class="book-card">
+            <img src="https://covers.openlibrary.org/b/id/240727-S.jpg" alt="Bìa sách" />
+            <h3>Tư Duy Nhanh Và Chậm</h3>
+            <p class="author">Daniel Kahneman</p>
+            <p class="price">199.000đ</p>
+            <button class="buy-btn">Đọc Ngay</button>
+        </div> -->
+        <!-- Copy thêm card tại đây nếu cần -->
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        &copy; 2025 Euler Library. Được phát triển bởi Ken :>
+    </footer>
+    <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-auth-compat.js"></script>
+    <script src="main/main.js"></script>
+</body>
+
+</html>
