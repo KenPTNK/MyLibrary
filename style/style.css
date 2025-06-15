@@ -21,12 +21,18 @@ body {
 
 /* Container */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 40px;
   padding: 0px 16px;
+  gap: 10px;
 }
 
 /* Header */
+.hello{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .header {
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
@@ -40,7 +46,6 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 16px 0;
-  gap: 20px;
 }
 
 .logo {
@@ -62,7 +67,7 @@ body {
   gap: 12px;
 }
 
-.nav a {
+.header-inner a {
   text-decoration: none;
   padding: 8px 16px;
   background-color: white;
@@ -74,27 +79,33 @@ body {
   cursor: pointer;
 }
 
-.nav a:hover {
+.header-inner a:hover {
   background-color: var(--primary);
   color: white;
 }
 
-.nav .login-btn {
+.header-inner .login-btn {
   background-color: var(--primary);
   color: white;
 }
 
-.nav .login-btn:hover {
+.header-inner .login-btn:hover {
   background-color: var(--primary-dark);
 }
 
-.nav .logout-btn {
+.header-inner .logout-btn {
   background-color: var(--primary);
   color: white;
 }
 
-.nav .logout-btn:hover {
+.header-inner .logout-btn:hover {
   background-color: var(--primary-dark);
+}
+
+.in-and-out {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
 /* Banner */
@@ -357,3 +368,6 @@ body {
 .search-group button:hover {
   background-color: var(--primary-dark);
 }
+
+/* Banner */
+

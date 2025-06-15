@@ -101,7 +101,7 @@ find.addEventListener('click', async function () {
         return;
     }
 
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=12&key=${key}`;
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&key=${key}`;
 
     try {
         const response = await fetch(url);
@@ -116,17 +116,22 @@ find.addEventListener('click', async function () {
 
         data.items.forEach(volume => {
             const title = volume.volumeInfo.title;
+            let imgSrc = '';
             let author = ''
-            if(volume.volumeInfo.authors){
+            let price = '';
+            if (volume.volumeInfo.authors != null) {
                 author = volume.volumeInfo.authors[0];
             }
-            let price = '';
             if (volume.saleInfo.saleability == 'FREE') {
                 price = 'Miễn Phí';
             } else if (volume.saleInfo.saleability == 'FOR_SALE') {
                 price = volume.saleInfo.retailPrice.amount.toString() + ' ' + volume.saleInfo.retailPrice.currencyCode;
             }
-            const imgSrc = volume.volumeInfo.imageLinks.thumbnail;
+            if (volume.volumeInfo.imageLinks != null) {
+                imgSrc = volume.volumeInfo.imageLinks.thumbnail;
+            } else {
+                return;
+            }
             createBookDiv(title, author, price, imgSrc);
         }
         )
@@ -136,5 +141,3 @@ find.addEventListener('click', async function () {
     }
 })
 
-// https://www.googleapis.com/books/v1/volumes?q=tên cái này là gọi theo tên điền cái tên vào là ra
-// https://www.googleapis.com/books/v1/volumes/id cái này là gọi theo id 
