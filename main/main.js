@@ -49,38 +49,49 @@ function createBookDiv(title, author, price, imgSrc) {
     const bookCard = document.createElement('div');
     bookCard.classList.add('book-card');
 
-    // Create and append the book image with dynamic src
+    // Create and append the book image
     const img = document.createElement('img');
-    img.src = imgSrc;  // Use dynamic image source
-    img.alt = "Bìa sách";  // You can replace it with a dynamic alt text if needed
+    img.src = imgSrc;
+    img.alt = "Bìa sách";
     bookCard.appendChild(img);
 
-    // Create and append the title element
+    // Create and append the title
     const bookTitle = document.createElement('h3');
     bookTitle.textContent = title;
     bookCard.appendChild(bookTitle);
 
-    // Create and append the author element
+    // Create and append the author
     const bookAuthor = document.createElement('p');
     bookAuthor.classList.add('author');
     bookAuthor.textContent = author;
     bookCard.appendChild(bookAuthor);
 
-    // Create and append the price element
+    // Create the footerBooks container
+    const footer = document.createElement('div');
+    footer.classList.add('footerBooks');
+
+    // Create and append the price
     const bookPrice = document.createElement('p');
     bookPrice.classList.add('price');
     bookPrice.textContent = price;
-    bookCard.appendChild(bookPrice);
+    footer.appendChild(bookPrice);
 
-    // Create and append the buy button
+    // Create and append the button
     const buyButton = document.createElement('button');
     buyButton.classList.add('buy-btn');
     buyButton.textContent = "Đọc Ngay";
-    bookCard.appendChild(buyButton);
+    footer.appendChild(buyButton);
 
-    // Append the newly created book card to the book grid section
+    // Append footerBooks to the card
+    bookCard.appendChild(footer);
+
+    // Finally, append to the grid
     const bookGrid = document.querySelector('.book-grid');
     bookGrid.appendChild(bookCard);
+}
+
+function formatNumberWithDots(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 
@@ -93,9 +104,9 @@ find.addEventListener('click', async function () {
     const author = document.getElementById('search-author').value.trim();
 
     let query = '';
-    if (title) query += 'intitle:' + title;
-    if (author) query += '+' + 'inauthor:' + author;
-
+    if ((title) && !(author)) query += 'intitle:' + title;
+    if ((author) && (title)) query += 'intitle:' + title + '+' + 'inauthor:' + author;
+    if (!(title) && (author)) query += 'inauthor:' + author;
     if (!query) {
         alert("Hãy nhập tên sách hoặc tác giả để bắt đầu tìm kiếm.");
         return;
@@ -121,11 +132,15 @@ find.addEventListener('click', async function () {
             let price = '';
             if (volume.volumeInfo.authors != null) {
                 author = volume.volumeInfo.authors[0];
+            } else {
+                author = "Unknown"
             }
             if (volume.saleInfo.saleability == 'FREE') {
                 price = 'Miễn Phí';
             } else if (volume.saleInfo.saleability == 'FOR_SALE') {
-                price = volume.saleInfo.retailPrice.amount.toString() + ' ' + volume.saleInfo.retailPrice.currencyCode;
+                price = formatNumberWithDots(volume.saleInfo.retailPrice.amount).toString() + ' ' + volume.saleInfo.retailPrice.currencyCode;
+            } else {
+                price = "Không có sẵn"
             }
             if (volume.volumeInfo.imageLinks != null) {
                 imgSrc = volume.volumeInfo.imageLinks.thumbnail;
@@ -140,4 +155,8 @@ find.addEventListener('click', async function () {
         alert("Đã xảy ra lỗi khi tìm kiếm.");
     }
 })
+
+// https://www.googleapis.com/books/v1/volumes?q=tên cái này là gọi theo tên điền cái tên vào là ra
+// https://www.googleapis.com/books/v1/volumes/id cái này là gọi theo id 
+
 
