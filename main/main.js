@@ -112,7 +112,7 @@ find.addEventListener('click', async function () {
         return;
     }
 
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&key=${key}`;
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=40&key=${key}`;
 
     try {
         const response = await fetch(url);
@@ -155,6 +155,35 @@ find.addEventListener('click', async function () {
         alert("Đã xảy ra lỗi khi tìm kiếm.");
     }
 })
+
+async function saveUIBooks(title, author) {
+    let query = '';
+    if ((title) && !(author)) query += 'intitle:' + title;
+    if ((author) && (title)) query += 'intitle:' + title + '+' + 'inauthor:' + author;
+    if ((title) && !(author)) query += 'inauthor:' + author;
+
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&key=${key}`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (!data.items || data.items.length === 0) {
+            console.log("No books found.");
+            return;
+        }
+
+        const firstItem = data.items[0];
+        if (firstItem) {
+            await addDoc(collection(db, "books"), firstItem);
+        } else {
+            console.log("No book found for this query.");
+        }
+        alert("Books saved to Firestore!");
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
 
 // https://www.googleapis.com/books/v1/volumes?q=tên cái này là gọi theo tên điền cái tên vào là ra
 // https://www.googleapis.com/books/v1/volumes/id cái này là gọi theo id 
