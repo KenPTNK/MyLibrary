@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trang Sản Phẩm - Sách</title>
+    <link rel="stylesheet" href="./style/product.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-inner">
+            <h1 class="logo">📚 Euler Library</h1>
+            <div class="search-group">
+                <input type="text" id="search-title" placeholder="Tên sách..." />
+                <input type="text" id="search-author" placeholder="Tác giả..." />
+                <button id="search-btn">Tìm kiếm</button>
+            </div>
+            <nav class="nav">
+                <a href="index.html">Trang chủ</a>
+                <a href="#">Liên hệ</a>
+                <a href="./login.html" class="login-btn">Đăng nhập</a>
+                <a href="#" class="logout-btn hidden" onclick="reload()">Đăng xuất</a>
+                <div class="user-card hidden">
+                    <div class="username hidden" id="username"></div>
+                    <img class="avatar hidden" id="avatar" src="" alt="User Avatar">
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div id="product-root"></div>
+
+    <!-- <div class="product-container">
+        <div class="product-image">
+            <img src="https://example.com/sach.jpg" alt="Ảnh sách">
+        </div>
+
+        <div class="product-details">
+            <h1>Cuốn sách: Nhà Giả Kim</h1>
+            <p>Tác giả: Paulo Coelho</p>
+
+            <div class="description">
+                <strong>Mô tả:</strong><br>
+                "Nhà Giả Kim" là câu chuyện về Santiago – một chàng trai chăn cừu trẻ tuổi trên hành trình tìm kho báu
+                và khám phá ra kho báu lớn nhất chính là hành trình theo đuổi ước mơ của mình. Cuốn sách chứa đựng nhiều
+                thông điệp sâu sắc về cuộc sống, số phận và sự can đảm để sống trọn vẹn.
+            </div>
+
+            <p class="price">Giá: 120.000 VND</p>
+            <p>Số lượng còn lại: <strong>17</strong></p>
+            <label>Số lượng mua:
+                <input type="number" min="1" max="17" value="1">
+            </label>
+
+            <div class="buttons">
+                <button onclick="alert('Mở sách để đọc...')">📖 Đọc sách</button>
+                <button onclick="alert('Đã thêm vào đơn hàng!')">🛒 Mua ngay</button>
+            </div>
+
+            <div class="address-input">
+                <label>Địa chỉ giao hàng:</label><br>
+                <textarea placeholder="Nhập địa chỉ của bạn..."></textarea>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        &copy; Euler Library - Since 2025
+    </footer>
+    <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-auth-compat.js"></script>
+    <script src="./main/main.js"></script>
+    <script src="./main/firestore.js"></script>
+    <script src="./main/product.js"></script>
+</body>
+
+</html>
