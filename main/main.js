@@ -51,7 +51,6 @@ async function saveBooks() {
                 data: data
             })
                 .then(() => {
-                    console.log(data);
                     // console.log("Document successfully written!");
                 })
                 .catch((error) => {
@@ -62,7 +61,6 @@ async function saveBooks() {
         }
     }
 }
-saveBooks();
 
 window.addEventListener("DOMContentLoaded", () => {
     const raw = localStorage.getItem("userData");

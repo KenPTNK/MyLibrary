@@ -123,9 +123,22 @@ find.addEventListener('click', async function () {
         console.error("Lỗi khi tìm kiếm sách:", error);
         alert("Đã xảy ra lỗi khi tìm kiếm.");
     }
-})
+});
 
-for (const id of ids) {
+const searchIds = [
+    "_UoZEQAAQBAJ",
+    "csoHEQAAQBAJ",
+    "QDowEQAAQBAJ",
+    "HmShg3dnLSMC",
+    "HXH-2XUU0pgC",
+    "y9YEEQAAQBAJ",
+    "lmSgEAAAQBAJ",
+    "eqjvDwAAQBAJ",
+    "V7SHrJBl9Z4C",
+    "UPAYAAAAYAAJ"
+];
+
+for (const id of searchIds) {
     let count = 1;
     db.collection("books").doc(id).get().then((doc) => {
         if (doc.exists) {
@@ -154,7 +167,7 @@ for (const id of ids) {
             createBookDiv(title, author, price, imgSrc, count);
             count++;
         } else {
-            console.log("No such document!");
+            console.log("No such document!" + id);
         }
     }).catch((error) => {
         console.error("Error getting document:", error);
