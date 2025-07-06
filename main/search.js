@@ -78,8 +78,6 @@ find.addEventListener('click', async function () {
             return;
         }
 
-        console.log("Kết quả tìm kiếm:", data.items); // For debug
-
         let count = 1;
         let bookArray = [];
 

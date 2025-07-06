@@ -40,24 +40,20 @@ const ids = [
 async function saveBooks() {
     for (const id of ids) {
         try {
-            db.collection("books").doc(id).delete().then(() => {
-                // console.log("Document successfully deleted!" + id);
-            }).catch((error) => {
-                console.error("Error removing document: ", error);
-            });
+            const doc = await db.collection("books").doc(id).get();
+            if (doc.exists) {
+                continue;
+            }
+
             const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${id}?key=${key}`);
             const data = await response.json();
-            db.collection("books").doc(id).set({
+
+            await db.collection("books").doc(id).set({
                 data: data
-            })
-                .then(() => {
-                    // console.log("Document successfully written!");
-                })
-                .catch((error) => {
-                    console.error("Error writing document: ", error);
-                });
+            });
+            // console.log("Document successfully written!");
         } catch (error) {
-            console.error("Error fetching book data:", error);
+            console.error("Error processing book with ID", id, ":", error);
         }
     }
 }
