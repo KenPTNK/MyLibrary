@@ -56,7 +56,7 @@ let author = '';
 if (data.volumeInfo.authors != null) {
     author = data.volumeInfo.authors[0];
 } else {
-    author = "Unknown"
+    author = "Unknown";
 }
 
 createProductPage({
