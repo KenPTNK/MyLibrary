@@ -136,8 +136,8 @@ const searchIds = [
     "UPAYAAAAYAAJ"
 ];
 
+let count = 1;
 for (const id of searchIds) {
-    let count = 1;
     db.collection("books").doc(id).get().then((doc) => {
         if (doc.exists) {
             const data = doc.data().data;
@@ -162,14 +162,26 @@ for (const id of searchIds) {
             } else {
                 return;
             }
-            createBookDiv(title, author, price, imgSrc, count);
-            count++;
+            createBookDiv(title, author, price, imgSrc, id);
         } else {
             console.log("No such document!" + id);
         }
     }).catch((error) => {
         console.error("Error getting document:", error);
     });
-}
+};
 
-
+let originalButtons = [];
+searchIds.forEach((id) => {
+    db.collection("books").doc(id).get().then((doc) => {
+        let originalData = doc.data().data;
+        let originalButton = document.getElementsByClassName(id);
+        Array.from(originalButton).forEach((button) => {
+            button.addEventListener('click', function () {
+                localStorage.setItem("book", JSON.stringify(originalData));
+                window.location.href = "product.html";
+            });
+        });
+    });
+});
+console.log(originalButtons);
