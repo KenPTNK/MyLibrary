@@ -7,14 +7,14 @@ console.log(data);
 // data.volumeInfo.saleInfo.saleability
 
 function formatNumberWithDots(number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 function createProductPage({ title, author, imageURL, description, price, stock, link }) {
-    const addressPlaceholder = "Nhập vào địa chỉ nhận hàng";
-    const root = document.getElementById("product-root");
+  const addressPlaceholder = "Nhập vào địa chỉ nhận hàng";
+  const root = document.getElementById("product-root");
 
-    root.innerHTML = `
+  root.innerHTML = `
         <div class="product-container">
           <div class="product-image">
             <img src="${imageURL}" alt="Ảnh sản phẩm">
@@ -43,28 +43,29 @@ function createProductPage({ title, author, imageURL, description, price, stock,
 
 let price = '';
 if (data.saleInfo.saleability == 'FREE') {
-    price = 'Miễn Phí';
+  price = 'Miễn Phí';
 } else if (data.saleInfo.saleability == 'FOR_SALE') {
-    price = formatNumberWithDots(data.saleInfo.retailPrice.amount).toString() + ' ' + data.saleInfo.retailPrice.currencyCode;
+  price = formatNumberWithDots(data.saleInfo.retailPrice.amount).toString() + ' ' + data.saleInfo.retailPrice.currencyCode;
 } else {
-    price = "Không có sẵn"
+  price = "Không có sẵn"
 }
 
 let title = data.volumeInfo.title;
 
 let author = '';
 if (data.volumeInfo.authors != null) {
-    author = data.volumeInfo.authors[0];
+  author = data.volumeInfo.authors[0];
 } else {
-    author = "Unknown";
+  author = "Unknown";
 }
 
 createProductPage({
-    title: title,
-    author: author,
-    imageURL: data.volumeInfo.imageLinks.thumbnail,
-    description: data.volumeInfo.description,
-    price: price,
-    stock: 20,
-    link: data.volumeInfo.previewLink
+  title: title,
+  author: author,
+  imageURL: data.volumeInfo.imageLinks.thumbnail,
+  description: data.volumeInfo.description,
+  price: price,
+  stock: 20,
+  link: data.volumeInfo.previewLink
 });
+
