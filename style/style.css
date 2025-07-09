@@ -346,6 +346,10 @@ body {
   color: var(--primary-dark);
 }
 
+.user-card:hover .username {
+  color: white;
+}
+
 .avatar {
   width: 36px;
   height: 36px;
