@@ -59,6 +59,11 @@ signUp.addEventListener('click', function () {
         alert("Mật khẩu nhập vào không khớp với nhau")
         location.reload();
     }
+    db.collection("username").add({
+        username: name,
+        email: email,
+        password: password
+    })
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
             // Signed in 

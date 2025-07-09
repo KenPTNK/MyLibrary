@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Trang Sản Phẩm - Sách</title>
     <link rel="stylesheet" href="./style/product.css">
+    <link rel="stylesheet" href="./style/style.css">
 </head>
 
 <body>
@@ -13,22 +14,25 @@
     <!-- Header -->
     <header class="header">
         <div class="container header-inner">
-            <h1 class="logo">📚 Euler Library</h1>
+            <nav class="nav">
+                <h1 class="logo">📚 Euler Library</h1>
+                <a href="./index.html">Trang chủ</a>
+                <a href="./search.html" onclick="saveBooks()" class="findBooks">Thư Viện</a>
+                <a href="#">Liên hệ</a>
+            </nav>
             <div class="search-group">
                 <input type="text" id="search-title" placeholder="Tên sách..." />
                 <input type="text" id="search-author" placeholder="Tác giả..." />
-                <button id="search-btn-product">Tìm kiếm</button>
+                <button id="search-btn">Tìm kiếm</button>
             </div>
-            <nav class="nav">
-                <a href="index.html">Trang chủ</a>
-                <a href="#">Liên hệ</a>
+            <div class="in-and-out">
                 <a href="./login.html" class="login-btn">Đăng nhập</a>
                 <a href="#" class="logout-btn hidden" onclick="reload()">Đăng xuất</a>
-                <div class="user-card hidden">
+                <a href="./account.html" class="user-card hidden" id="user-card-link">
                     <div class="username hidden" id="username"></div>
                     <img class="avatar hidden" id="avatar" src="" alt="User Avatar">
-                </div>
-            </nav>
+                </a>
+            </div>
         </div>
     </header>
 

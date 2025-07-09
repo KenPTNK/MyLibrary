@@ -15,30 +15,28 @@ function createProductPage({ title, author, imageURL, description, price, stock,
   const root = document.getElementById("product-root");
 
   root.innerHTML = `
-        <div class="product-container">
-          <div class="product-image">
-            <img src="${imageURL}" alt="Ảnh sản phẩm">
+    <div class="product-container">
+      <div class="product-header">
+        <div class="product-image">
+          <img src="${imageURL}" alt="Ảnh sản phẩm">
+        </div>
+        <div class="product-details">
+          <h1>${title}</h1>
+          <p>Tác giả: ${author}</p>
+          <p class="price">Giá: ${price}</p>
+          <div class="buttons">
+            <button onclick="window.location.href='${link}'">📖 Đọc thử sách</button>
+            <button onclick="alert('Đã thêm vào đơn hàng!')">🛒 Mua ngay</button>
           </div>
-          <div class="product-details">
-            <h1>${title}</h1>
-            <p>Tác giả: ${author}</p>
-            <div class="description"><strong>Mô tả:</strong><br>${description}</div>
-            <p class="price">Giá: ${price}</p>
-            <p>Số lượng còn lại: <strong>${stock}</strong></p>
-            <label>Số lượng mua:
-              <input type="number" min="1" max="${stock}" value="1">
-            </label>
-            <div class="buttons">
-              <button onclick="window.location.href='${link}'">📖 Đọc thử sách</button>
-              <button onclick="alert('Đã thêm vào đơn hàng!')">🛒 Mua ngay</button>
-            </div>
-            <div class="address-input">
-              <label>Địa chỉ giao hàng:</label><br>
-              <textarea placeholder="${addressPlaceholder}"></textarea>
-            </div>
+          <div class="address-input">
+            <label>Địa chỉ giao hàng:</label><br>
+            <textarea placeholder="${addressPlaceholder}"></textarea>
           </div>
         </div>
-      `;
+      </div>
+      <div class="description"><strong>Mô tả:</strong><br>${description}</div>
+    </div>
+  `;
 }
 
 let price = '';

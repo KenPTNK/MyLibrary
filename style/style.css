@@ -65,6 +65,7 @@ body {
 .nav {
   display: flex;
   gap: 12px;
+  align-items: center;
 }
 
 .header-inner a {
@@ -346,9 +347,7 @@ body {
   color: var(--primary-dark);
 }
 
-.user-card:hover .username {
-  color: white;
-}
+
 
 .avatar {
   width: 36px;

@@ -61,6 +61,7 @@ async function saveBooks() {
 window.addEventListener("DOMContentLoaded", () => {
     const raw = localStorage.getItem("userData");
     if (raw) {
+        console.log(1);
         const data = JSON.parse(raw);
         document.querySelector('.user-card').classList.remove('hidden');
         document.querySelector('.user-card').classList.add('flex');
@@ -79,7 +80,8 @@ function reload() {
     localStorage.removeItem("userData");
     firebase.auth().signOut().then(() => {
         alert("Đã đăng xuất!");
-        location.reload(); // Reload lại trang để reset UI
+        location.reload();
+        window.location.href = "index.html";
     }).catch((error) => {
         console.error("Lỗi khi đăng xuất:", error);
         alert("Có lỗi khi đăng xuất!");

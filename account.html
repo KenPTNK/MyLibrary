@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Euler Library</title>
+    <link rel="stylesheet" href="./style/style.css" />
+    <link rel="stylesheet" href="./style/account.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-inner">
+            <nav class="nav">
+                <h1 class="logo">📚 Euler Library</h1>
+                <a href="index.html">Trang chủ</a>
+                <a href="./search.html" onclick="saveBooks()" class="findBooks">Thư Viện</a>
+                <a href="#">Liên hệ</a>
+            </nav>
+            <div class="in-and-out">
+                <a href="./login.html" class="login-btn">Đăng nhập</a>
+                <a href="#" class="logout-btn hidden" onclick="reload()">Đăng xuất</a>
+                <a href="./account.html" class="user-card hidden" id="user-card-link">
+                    <div class="username hidden" id="username"></div>
+                    <img class="avatar hidden" id="avatar" src="" alt="User Avatar">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <section>
+        <div class="account">
+            <div class="avatar-container">
+                <img class="user-avatar" id="user-avatar" src="" alt="User Avatar">
+                <h2 class="user-username" id="user-name"></h2>
+                <p class="email" id="user-email"></p>
+            </div>
+            <div class="user-info-row">
+                <div class="user-books">
+                    <h3>Sách đã thuê</h3>
+                    <div class="books-list" id="books-list">
+                        <!-- Danh sách sách sẽ được hiển thị ở đây -->
+                    </div>
+                </div>
+                <div class="money">
+                    <h3>Số dư tài khoản</h3>
+                    <p id="account-balance">0 VND</p>
+                    <button id="recharge-btn">Nạp tiền</button>
+                    <div id="recharge-modal" class="modal hidden">
+                        <div class="modal-content">
+                            <span class="close" id="close-modal">&times;</span>
+                            <h2>Nạp tiền vào tài khoản</h2>
+                            <input type="number" id="recharge-amount" placeholder="Nhập số tiền" />
+                            <button id="confirm-recharge">Xác nhận</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        &copy; Euler Library - Since 2025
+    </footer>
+    <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-auth-compat.js"></script>
+    <script src="./main/saveBooks.js"></script>
+    <script src="./main/main.js"></script>
+    <script src="./main/account.js"></script>
+</body>
+
+</html>
