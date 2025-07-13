@@ -60,3 +60,24 @@ confirmRecharge.addEventListener("click", function () {
     });
 });
 
+// illustrate the rented books
+db.collection("username").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        if (doc.data().username === username) {
+            const rentedBooksList = document.getElementById('rented-books-list');
+            doc.ref.collection("rentedBooks").get().then((rentedBooksSnapshot) => {
+                rentedBooksSnapshot.forEach((bookDoc) => {
+                    const bookData = bookDoc.data();
+                    const bookItem = document.createElement('div');
+                    bookItem.className = 'rented-book-item';
+                    bookItem.innerHTML = `
+                        <h4>${bookData.name}</h4>
+                        <p>Giá: ${bookData.price}</p>
+                        <p>Địa chỉ giao hàng: ${bookData.address}</p>
+                    `;
+                    rentedBooksList.appendChild(bookItem);
+                });
+            });
+        }
+    });
+});

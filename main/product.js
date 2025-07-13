@@ -2,8 +2,14 @@ function formatNumberWithDots(number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-// lấy tiền từ firestore
+// check if login or not, if login then show account balance
+const userData = localStorage.getItem('userData');
+if (userData) {
+  const taikhoan = document.querySelector('.sodutaikhoan');
+  taikhoan.classList.remove('hidden');
+}
 
+// lấy tiền từ firestore
 const username = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")).username : '';
 db.collection("username").get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
@@ -37,7 +43,7 @@ function createProductPage({ title, author, imageURL, description, price, stock,
           <p>Tác giả: ${author}</p>
           <p class="price">Giá: ${price}</p>
           <div class="buttons">
-            <button onclick="window.location.href='${link}'">📖 Đọc thử sách</button>
+            <button onclick="window.location.href='${link}'">📖 Xem qua sách</button>
             <button>🛒 Mua ngay</button>
           </div>
           <div class="address-input">
@@ -103,6 +109,10 @@ function updateAccountBalance(amount) {
 
 // Event listener for the "Mua ngay" button
 document.querySelector('.buttons button:nth-child(2)').addEventListener('click', () => {
+  if(!userData) {
+    alert('Vui lòng đăng nhập để thực hiện giao dịch.');
+    return;
+  }
   const address = document.querySelector('.address-input textarea').value.trim();
   if (address === '') {
     alert('Vui lòng nhập địa chỉ giao hàng.');
