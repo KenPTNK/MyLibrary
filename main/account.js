@@ -65,6 +65,14 @@ db.collection("username").get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
         if (doc.data().username === username) {
             const rentedBooksList = document.getElementById('rented-books-list');
+            // checking if the user has rented books
+            doc.ref.collection("rentedBooks").get().then((rentedBooksSnapshot) => {
+                if (rentedBooksSnapshot.empty) {
+                    rentedBooksList.innerHTML = "<p>Không có sách nào đã thuê.</p>";
+                    return;
+                }
+                rentedBooksList.innerHTML = ""; // Clear the list before adding new items
+            });
             doc.ref.collection("rentedBooks").get().then((rentedBooksSnapshot) => {
                 rentedBooksSnapshot.forEach((bookDoc) => {
                     const bookData = bookDoc.data();

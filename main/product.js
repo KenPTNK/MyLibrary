@@ -12,12 +12,12 @@ if (userData) {
 // lấy tiền từ firestore
 const username = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")).username : '';
 db.collection("username").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        if (doc.data().username === username) {
-            const balance = doc.data().balance || 0;
-            document.getElementById('account-balance').textContent = formatNumberWithDots(balance) + " VND";
-        }
-    });
+  querySnapshot.forEach((doc) => {
+    if (doc.data().username === username) {
+      const balance = doc.data().balance || 0;
+      document.getElementById('account-balance').textContent = formatNumberWithDots(balance) + " VND";
+    }
+  });
 });
 
 const data = JSON.parse(localStorage.getItem("book"));
@@ -91,10 +91,6 @@ function updateAccountBalance(amount) {
     querySnapshot.forEach((doc) => {
       if (doc.data().username === username) {
         const newBalance = doc.data().balance - amount;
-        if (newBalance < 0) {
-          alert('Số dư tài khoản không đủ để thực hiện giao dịch.');
-          return;
-        }
         db.collection("username").doc(doc.id).update({
           balance: newBalance
         }).then(() => {
@@ -109,7 +105,7 @@ function updateAccountBalance(amount) {
 
 // Event listener for the "Mua ngay" button
 document.querySelector('.buttons button:nth-child(2)').addEventListener('click', () => {
-  if(!userData) {
+  if (!userData) {
     alert('Vui lòng đăng nhập để thực hiện giao dịch.');
     return;
   }
@@ -124,6 +120,13 @@ document.querySelector('.buttons button:nth-child(2)').addEventListener('click',
   } else if (price === 'Không có sẵn') {
     alert('Sách này hiện không có sẵn để mua.');
   } else {
+    // check if user has enough balance
+    const balanceText = document.getElementById('account-balance').textContent;
+    const balance = parseInt(balanceText.replace(/[^0-9]/g, ''), 10);
+    if (balance < parseInt(price.replace(/[^0-9]/g, ''), 10)) {
+      alert('Số dư tài khoản không đủ để thực hiện giao dịch.');
+      return;
+    }
     const amount = parseInt(price.replace(/[^0-9]/g, ''), 10);
     updateAccountBalance(amount);
     db.collection("username").get().then((querySnapshot) => {
@@ -132,7 +135,7 @@ document.querySelector('.buttons button:nth-child(2)').addEventListener('click',
           const rentedBook = {
             name: title,
             price: price,
-            address: address
+            address: address,
           };
           db.collection("username")
             .doc(doc.id)
