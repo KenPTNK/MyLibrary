@@ -40,24 +40,24 @@
                 <p class="email" id="user-email"></p>
             </div>
             <div class="user-info-row">
-                <div class="user-books">
-                    <h3>Sách đã thuê</h3>
-                    <div class="books-list" id="books-list">
-                        <!-- Danh sách sách sẽ được hiển thị ở đây -->
-                    </div>
-                </div>
                 <div class="money">
                     <h3>Số dư tài khoản</h3>
                     <p id="account-balance">0 VND</p>
                     <button id="recharge-btn">Nạp tiền</button>
-                    <div id="recharge-modal" class="modal hidden">
-                        <div class="modal-content">
-                            <span class="close" id="close-modal">&times;</span>
-                            <h2>Nạp tiền vào tài khoản</h2>
-                            <input type="number" id="recharge-amount" placeholder="Nhập số tiền" />
-                            <button id="confirm-recharge">Xác nhận</button>
-                        </div>
+                </div>
+                <div id="recharge-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <span class="close" id="close-modal">&times;</span>
+                        <h3>Nạp tiền vào tài khoản</h3>
+                        <input type="number" id="recharge-amount" placeholder="Nhập số tiền (VND)" />
+                        <button id="confirm-recharge">Xác nhận</button>
                     </div>
+                </div>
+            </div>
+            <div class="rentedBooks">
+                <h3>Sách đã thuê</h3>
+                <div class="rented-books-list" id="rented-books-list">
+                    <!-- Danh sách sách sẽ được hiển thị ở đây -->
                 </div>
             </div>
         </div>

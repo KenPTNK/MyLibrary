@@ -19,12 +19,11 @@
                 <a href="./index.html">Trang chủ</a>
                 <a href="./search.html" onclick="saveBooks()" class="findBooks">Thư Viện</a>
                 <a href="#">Liên hệ</a>
+                <div class="sodutaikhoan">
+                    <h3>Số dư tài khoản:</h3>
+                    <p id="account-balance">0 VND</p>
+                </div>
             </nav>
-            <div class="search-group">
-                <input type="text" id="search-title" placeholder="Tên sách..." />
-                <input type="text" id="search-author" placeholder="Tác giả..." />
-                <button id="search-btn">Tìm kiếm</button>
-            </div>
             <div class="in-and-out">
                 <a href="./login.html" class="login-btn">Đăng nhập</a>
                 <a href="#" class="logout-btn hidden" onclick="reload()">Đăng xuất</a>
@@ -82,7 +81,6 @@
     <script src="./main/main.js"></script>
     <script src="./main/firestore.js"></script>
     <script src="./main/product.js"></script>
-    <script src="./main/search.js"></script>
 </body>
 
 </html>
