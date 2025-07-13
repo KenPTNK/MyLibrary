@@ -29,7 +29,11 @@ login.addEventListener('click', function () {
                 url: user._delegate.photoURL
             }
             localStorage.setItem("userData", JSON.stringify(data));
-            window.location.href = "index.html"
+            if (email === 'admin@gmail.com') {
+                window.location.href = "admin.html";
+            } else {
+                window.location.href = "index.html";
+            }
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -57,6 +61,10 @@ signUp.addEventListener('click', function () {
     const repass = document.getElementById("repass-signUp").value;
     if (password != repass) {
         alert("Mật khẩu nhập vào không khớp với nhau")
+        location.reload();
+    }
+    if (password.length < 6) {
+        alert("Mật khẩu phải có ít nhất 6 ký tự");
         location.reload();
     }
     db.collection("username").add({
