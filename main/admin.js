@@ -52,6 +52,14 @@ function createBookDiv(title, author, price, imgSrc, index) {
     deleteBtn.classList.add('delete-btn');
     deleteBtn.dataset.id = index;
     deleteBtn.innerHTML = '<i class="far fa-trash-alt"></i>';
+    deleteBtn.addEventListener('click', function () {
+        db.collection("books").doc(index).delete().then(() => {
+            alert("Xoá thành công sách");
+            window.location.reload();
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+        });
+    });
 
     // Append both buttons to actions container
     actions.appendChild(editBtn);
@@ -103,4 +111,3 @@ db.collection("books").get().then((querySnapshot) => {
 }).catch((error) => {
     console.error("Error getting documents:", error);
 });
-
