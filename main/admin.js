@@ -30,15 +30,38 @@ function createBookDiv(title, author, price, imgSrc, index) {
     bookPrice.textContent = price;
     footer.appendChild(bookPrice);
 
-    // Create and append the button
+    // Create and append the "Đọc Ngay" button
     const buyButton = document.createElement('button');
     buyButton.classList.add('buy-btn');
-    buyButton.classList.add(index);
+    buyButton.classList.add(index); // Consider using dataset instead
     buyButton.textContent = "Đọc Ngay";
     footer.appendChild(buyButton);
 
     // Append footerBooks to the card
     bookCard.appendChild(footer);
+
+    // ✅ Create action buttons container (edit/delete)
+    const actions = document.createElement('div');
+    actions.classList.add('book-actions');
+
+    // ✏️ Edit button
+    const editBtn = document.createElement('button');
+    editBtn.classList.add('edit-btn');
+    editBtn.dataset.id = index;
+    editBtn.textContent = '✏️ Sửa';
+
+    // 🗑️ Delete button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.classList.add('delete-btn');
+    deleteBtn.dataset.id = index;
+    deleteBtn.textContent = '🗑️ Xoá';
+
+    // Append buttons to actions container
+    actions.appendChild(editBtn);
+    actions.appendChild(deleteBtn);
+
+    // Append actions container to card
+    bookCard.appendChild(actions);
 
     // Finally, append to the grid
     const bookGrid = document.querySelector('.book-grid');
@@ -94,3 +117,4 @@ db.collection("books").get().then((querySnapshot) => {
 }).catch((error) => {
     console.error("Error getting documents:", error);
 });
+
