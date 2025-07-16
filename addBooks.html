@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Euler Library</title>
+    <link rel="stylesheet" href="./style/style.css" />
+    <link rel="stylesheet" href="./style/addbooks.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-inner">
+            <nav class="nav">
+                <h1 class="logo">📚 Euler Library</h1>
+                <a href="./admin.html">Quản lý sách</a>
+                <a href="./addBooks.html">Thêm sách</a>
+                <!-- <a href="./adminBooks.html" onclick="saveBooks()" class="findBooks">Quản lý đơn hàng</a> -->
+            </nav>
+            <div class="in-and-out">
+                <a href="./login.html" class="login-btn">Đăng nhập</a>
+                <a href="#" class="logout-btn hidden" onclick="reload()">Đăng xuất</a>
+                <a href="./account.html" class="user-card hidden" id="user-card-link">
+                    <div class="username hidden" id="username"></div>
+                    <img class="avatar hidden" id="avatar" src="" alt="User Avatar">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Book Form -->
+    <main class="form-wrapper">
+        <h2 class="form-title">📘 Thêm Sách Mới</h2>
+        <form id="create-book-form" class="book-form">
+            <div class="form-group">
+                <label for="title">Tiêu đề sách</label>
+                <input type="text" id="title" name="title" placeholder="Nhập tiêu đề sách" required />
+            </div>
+            <div class="form-group">
+                <label for="author">Tác giả</label>
+                <input type="text" id="author" name="author" placeholder="Nhập tên tác giả" required />
+            </div>
+            <div class="form-group">
+                <label for="description">Mô tả</label>
+                <textarea id="description" name="description" rows="4" placeholder="Mô tả nội dung sách..."
+                    required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="price">Giá bán (VNĐ)</label>
+                <input type="number" id="price" name="price" placeholder="Nhập giá bán" required />
+            </div>
+            <div class="form-group">
+                <label for="imgLink">Link ảnh bìa</label>
+                <input type="url" id="imgLink" name="imgLink" placeholder="Dán link ảnh bìa sách" required />
+            </div>
+            <div class="form-group">
+                <label for="previewLink">Link đọc thử</label>
+                <input type="url" id="previewLink" name="previewLink"
+                    placeholder="Dán link đọc thử (Google Books...)" />
+            </div>
+            <button type="submit" class="auth-btn">Thêm Sách</button>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        &copy; Euler Library - Since 2025
+    </footer>
+    <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-auth-compat.js"></script>
+    <script src="./main/main.js"></script>
+</body>
+
+</html>
