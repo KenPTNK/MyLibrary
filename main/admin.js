@@ -43,6 +43,7 @@ function createBookDiv(title, author, price, imgSrc, index) {
     editBtn.dataset.id = index;
     editBtn.innerHTML = '<i class="far fa-edit"></i>';
     editBtn.addEventListener('click', function () {
+        localStorage.setItem("editBookId", index);
         window.location.href = "edit.html";
     });
 
@@ -98,16 +99,6 @@ db.collection("books").get().then((querySnapshot) => {
         } else {
             console.log("No such document! " + doc.id);
         }
-    });
-
-    // Add event listeners for the dynamically created buttons
-    querySnapshot.forEach((doc) => {
-        let originalButton = document.getElementsByClassName(doc.id);
-        Array.from(originalButton).forEach((button) => {
-            button.addEventListener('click', function () {
-                localStorage.setItem("editBookId", doc.id);
-            });
-        });
     });
 }).catch((error) => {
     console.error("Error getting documents:", error);
