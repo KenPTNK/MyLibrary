@@ -43,8 +43,12 @@ function createProductPage({ title, author, imageURL, description, price, stock,
           <p>Tác giả: ${author}</p>
           <p class="price">Giá: ${price}</p>
           <div class="buttons">
+            <div class="quantity-box">
+              <label for="quantity-input">Số lượng:</label>
+              <input type="number" id="quantity-input" min="1" max="${stock}" value="1" style="width:60px;">
+            </div>
             <button onclick="window.location.href='${link}'">📖 Xem qua sách</button>
-            <button>🛒 Mua ngay</button>
+            <button class="buy-btn">🛒 Mua ngay</button>
           </div>
           <div class="address-input">
             <label>Địa chỉ giao hàng:</label><br>
@@ -104,7 +108,7 @@ function updateAccountBalance(amount) {
 }
 
 // Event listener for the "Mua ngay" button
-document.querySelector('.buttons button:nth-child(2)').addEventListener('click', () => {
+document.querySelector('.buttons .buy-btn').addEventListener('click', () => {
   if (!userData) {
     alert('Vui lòng đăng nhập để thực hiện giao dịch.');
     return;
@@ -123,11 +127,12 @@ document.querySelector('.buttons button:nth-child(2)').addEventListener('click',
     // check if user has enough balance
     const balanceText = document.getElementById('account-balance').textContent;
     const balance = parseInt(balanceText.replace(/[^0-9]/g, ''), 10);
-    if (balance < parseInt(price.replace(/[^0-9]/g, ''), 10)) {
+    const quantity = parseInt(document.getElementById('quantity-input').value, 10);
+    if (balance < parseInt(price.replace(/[^0-9]/g, ''), 10) * quantity) {
       alert('Số dư tài khoản không đủ để thực hiện giao dịch.');
       return;
     }
-    const amount = parseInt(price.replace(/[^0-9]/g, ''), 10);
+    const amount = parseInt(price.replace(/[^0-9]/g, ''), 10) * quantity;
     updateAccountBalance(amount);
     db.collection("username").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -136,6 +141,7 @@ document.querySelector('.buttons button:nth-child(2)').addEventListener('click',
             name: title,
             price: price,
             address: address,
+            quantity: quantity,
           };
           db.collection("username")
             .doc(doc.id)

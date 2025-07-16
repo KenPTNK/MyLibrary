@@ -123,59 +123,41 @@ find.addEventListener('click', async function () {
     }
 });
 
-const searchIds = [
-    "_UoZEQAAQBAJ",
-    "csoHEQAAQBAJ",
-    "QDowEQAAQBAJ",
-    "HmShg3dnLSMC",
-    "HXH-2XUU0pgC",
-    "y9YEEQAAQBAJ",
-    "lmSgEAAAQBAJ",
-    "eqjvDwAAQBAJ",
-    "V7SHrJBl9Z4C",
-    "UPAYAAAAYAAJ"
-];
-
-let count = 1;
-for (const id of searchIds) {
-    db.collection("books").doc(id).get().then((doc) => {
+db.collection("books").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
         if (doc.exists) {
             const data = doc.data().data;
             const title = data.volumeInfo.title;
             let imgSrc = '';
-            let author = ''
+            let author = '';
             let price = '';
             if (data.volumeInfo.authors != null) {
                 author = data.volumeInfo.authors[0];
             } else {
-                author = "Unknown"
+                author = "Unknown";
             }
             if (data.saleInfo.saleability == 'FREE') {
                 price = 'Miễn Phí';
             } else if (data.saleInfo.saleability == 'FOR_SALE') {
                 price = formatNumberWithDots(data.saleInfo.retailPrice.amount).toString() + ' ' + data.saleInfo.retailPrice.currencyCode;
             } else {
-                price = "Không có sẵn"
+                price = "Không có sẵn";
             }
             if (data.volumeInfo.imageLinks != null) {
                 imgSrc = data.volumeInfo.imageLinks.thumbnail;
             } else {
                 return;
             }
-            createBookDiv(title, author, price, imgSrc, id);
+            createBookDiv(title, author, price, imgSrc, doc.id);
         } else {
-            console.log("No such document!" + id);
+            console.log("No such document! " + doc.id);
         }
-    }).catch((error) => {
-        console.error("Error getting document:", error);
     });
-};
 
-let originalButtons = [];
-searchIds.forEach((id) => {
-    db.collection("books").doc(id).get().then((doc) => {
+    // Add event listeners for the dynamically created buttons
+    querySnapshot.forEach((doc) => {
         let originalData = doc.data().data;
-        let originalButton = document.getElementsByClassName(id);
+        let originalButton = document.getElementsByClassName(doc.id);
         Array.from(originalButton).forEach((button) => {
             button.addEventListener('click', function () {
                 localStorage.setItem("book", JSON.stringify(originalData));
@@ -183,5 +165,6 @@ searchIds.forEach((id) => {
             });
         });
     });
+}).catch((error) => {
+    console.error("Error getting documents:", error);
 });
-console.log(originalButtons);

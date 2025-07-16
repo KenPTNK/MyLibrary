@@ -68,7 +68,7 @@ db.collection("username").get().then((querySnapshot) => {
             // checking if the user has rented books
             doc.ref.collection("rentedBooks").get().then((rentedBooksSnapshot) => {
                 if (rentedBooksSnapshot.empty) {
-                    rentedBooksList.innerHTML = "<p>Không có sách nào đã thuê.</p>";
+                    rentedBooksList.innerHTML = "<p>Tài khoản chưa mua sách.</p>";
                     return;
                 }
                 rentedBooksList.innerHTML = ""; // Clear the list before adding new items
@@ -82,6 +82,7 @@ db.collection("username").get().then((querySnapshot) => {
                         <h4>${bookData.name}</h4>
                         <p>Giá: ${bookData.price}</p>
                         <p>Địa chỉ giao hàng: ${bookData.address}</p>
+                        <p>Số lượng: ${bookData.quantity}</p>
                     `;
                     rentedBooksList.appendChild(bookItem);
                 });
