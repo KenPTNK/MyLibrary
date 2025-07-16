@@ -15,28 +15,19 @@ const db = firebase.firestore();
 
 const key = 'AIzaSyCTsl-tX2E6HfwOwbIBUXP5a8YESez5akw';
 
-const ids = [
-    "_UoZEQAAQBAJ",
-    "csoHEQAAQBAJ",
-    "QDowEQAAQBAJ",
-    "HmShg3dnLSMC",
-    "HXH-2XUU0pgC",
-    "y9YEEQAAQBAJ",
-    "lmSgEAAAQBAJ",
-    "eqjvDwAAQBAJ",
-    "V7SHrJBl9Z4C",
-    "UPAYAAAAYAAJ"
-];
+// const ids = [
+//     "_UoZEQAAQBAJ",
+//     "csoHEQAAQBAJ",
+//     "QDowEQAAQBAJ",
+//     "HmShg3dnLSMC",
+//     "HXH-2XUU0pgC",
+//     "y9YEEQAAQBAJ",
+//     "lmSgEAAAQBAJ",
+//     "eqjvDwAAQBAJ",
+//     "V7SHrJBl9Z4C",
+//     "UPAYAAAAYAAJ"
+// ];
 
-// db.collection("books").get().then((querySnapshot) => {
-//     querySnapshot.forEach((doc) => {
-//         db.collection("books").doc(doc.id).delete().then(() => {
-//             console.log("Document successfully deleted: " + doc.id);
-//         }).catch((error) => {
-//             console.error("Error removing document: ", error);
-//         });
-//     });
-// });
 async function saveBooks() {
     for (const id of ids) {
         try {

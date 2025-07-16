@@ -1,35 +1,3 @@
-const form = document.getElementById('manual-form');
-
-// Form submit handler
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    // Get input values
-    const title = form.title.value.trim();
-    const author = form.author.value.trim();
-    const description = form.description.value.trim();
-    const price = parseFloat(form.price.value);
-    const imgLink = form.imgLink.value.trim();
-    const previewLink = form.previewLink.value.trim();
-
-    // Validation check (can be enhanced further)
-    if (!title || !author || !description || !imgLink || isNaN(price)) {
-        alert("Vui lòng điền đầy đủ thông tin hợp lệ.");
-        return;
-    }
-
-    try {
-        // Add the book to Firestore
-        db.collection("books").
-
-            alert('📚 Sách đã được thêm thành công!');
-        form.reset(); // Clear the form
-    } catch (error) {
-        console.error('Lỗi khi thêm sách:', error);
-        alert('Đã xảy ra lỗi khi thêm sách. Vui lòng thử lại.');
-    }
-});
-
 const manualForm = document.getElementById('manual-form');
 const idForm = document.getElementById('id-form');
 const manualBtn = document.getElementById('manualBtn');
@@ -96,19 +64,15 @@ idForm.addEventListener('submit', async (e) => {
 
         if (!data.volumeInfo) throw new Error("Không tìm thấy sách.");
 
-        const volume = data.volumeInfo;
-        const title = volume.title || "Không có tiêu đề";
-        const author = volume.authors ? volume.authors.join(', ') : "Không rõ";
-        const description = volume.description || "Không có mô tả";
-        const price = 0; // hoặc mặc định
-        const imgLink = volume.imageLinks?.thumbnail || "";
-        const previewLink = volume.previewLink || "";
-
+        // Check if the book already exists in Firestore
+        const existingDoc = await db.collection('books').doc(bookId).get();
+        if (existingDoc.exists) {
+            alert("Sách này đã tồn tại trong cơ sở dữ liệu.");
+            return;
+        }
         await db.collection('books').doc(bookId).set({
-            title, author, description, price, imgLink, previewLink,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            data: data,
         });
-
         alert("✅ Sách đã được thêm từ Google Books!");
         idForm.reset();
     } catch (error) {
