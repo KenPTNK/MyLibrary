@@ -31,10 +31,16 @@
         </div>
     </header>
 
+    <!-- Chế độ -->
+    <div class="form-toggle">
+        <button id="manualBtn" class="tab active">📘 Nhập tay</button>
+        <button id="idOnlyBtn" class="tab">🔍 Nhập bằng ID</button>
+    </div>
+
     <!-- Book Form -->
     <main class="form-wrapper">
         <h2 class="form-title">📘 Thêm Sách Mới</h2>
-        <form id="create-book-form" class="book-form">
+        <form id="manual-form" class="book-form">
             <div class="form-group">
                 <label for="title">Tiêu đề sách</label>
                 <input type="text" id="title" name="title" placeholder="Nhập tiêu đề sách" required />
@@ -63,6 +69,13 @@
             </div>
             <button type="submit" class="auth-btn">Thêm Sách</button>
         </form>
+        <form id="id-form" class="hidden">
+            <div class="form-group">
+                <label for="bookId">ID sách (Google Books ID)</label>
+                <input type="text" id="bookId" name="bookId" placeholder="Nhập ID sách" required />
+            </div>
+            <button type="submit" class="auth-btn">Thêm Sách</button>
+        </form>
     </main>
 
     <!-- Footer -->
@@ -73,6 +86,7 @@
     <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-auth-compat.js"></script>
     <script src="./main/main.js"></script>
+    <script src="./main/addBook.js"></script>
 </body>
 
 </html>
