@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trang Sản Phẩm - Sách</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="./style/product.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/edit.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-inner">
+            <nav class="nav">
+                <h1 class="logo">📚 Euler Library</h1>
+                <a href="./admin.html">Quản lý sách</a>
+                <!-- <a href="./adminBooks.html" onclick="saveBooks()" class="findBooks">Quản lý đơn hàng</a> -->
+            </nav>
+            <div class="in-and-out">
+                <a href="./login.html" class="login-btn">Đăng nhập</a>
+                <a href="#" class="logout-btn hidden" onclick="reload()">Đăng xuất</a>
+                <a href="./account.html" class="user-card hidden" id="user-card-link">
+                    <div class="username hidden" id="username"></div>
+                    <img class="avatar hidden" id="avatar" src="" alt="User Avatar">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div id="product-root"></div>
+    <div id="edit-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h3 id="modal-title">Chỉnh sửa</h3>
+            <input id="modal-input" type="text" placeholder="" />
+            <div class="modal-buttons">
+                <button id="modal-save">Lưu</button>
+                <button id="modal-cancel">Huỷ</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        &copy; Euler Library - Since 2025
+    </footer>
+    <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-auth-compat.js"></script>
+    <script src="./main/main.js"></script>
+    <script src="./main/edit.js"></script>
+</body>
+
+</html>

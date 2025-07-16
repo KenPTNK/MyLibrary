@@ -30,13 +30,6 @@ function createBookDiv(title, author, price, imgSrc, index) {
     bookPrice.textContent = price;
     footer.appendChild(bookPrice);
 
-    // Create and append the "Đọc Ngay" button
-    const buyButton = document.createElement('button');
-    buyButton.classList.add('buy-btn');
-    buyButton.classList.add(index);
-    buyButton.textContent = "Đọc Ngay";
-    footer.appendChild(buyButton);
-
     // Append footerBooks to the card
     bookCard.appendChild(footer);
 
@@ -49,6 +42,9 @@ function createBookDiv(title, author, price, imgSrc, index) {
     editBtn.classList.add('edit-btn');
     editBtn.dataset.id = index;
     editBtn.innerHTML = '<i class="far fa-edit"></i>';
+    editBtn.addEventListener('click', function () {
+        window.location.href = "edit.html";
+    });
 
     // 🗑️ Delete button with icon
     const deleteBtn = document.createElement('button');
@@ -106,12 +102,10 @@ db.collection("books").get().then((querySnapshot) => {
 
     // Add event listeners for the dynamically created buttons
     querySnapshot.forEach((doc) => {
-        let originalData = doc.data().data;
         let originalButton = document.getElementsByClassName(doc.id);
         Array.from(originalButton).forEach((button) => {
             button.addEventListener('click', function () {
-                localStorage.setItem("book", JSON.stringify(originalData));
-                window.location.href = "product.html";
+                localStorage.setItem("editBookId", doc.id);
             });
         });
     });
