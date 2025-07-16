@@ -1,0 +1,49 @@
+.book-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 0 10px 10px 10px;
+}
+
+.book-actions button {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* ✏️ Edit button */
+.edit-btn {
+    background-color: #ffc107;
+    /* yellow */
+    color: #000;
+}
+
+.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+/* 🗑️ Delete button */
+.delete-btn {
+    background-color: #dc3545;
+    /* red */
+    color: #fff;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+.book-actions i {
+  font-size: 16px;
+  pointer-events: none;
+}

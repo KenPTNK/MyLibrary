@@ -33,40 +33,41 @@ function createBookDiv(title, author, price, imgSrc, index) {
     // Create and append the "Đọc Ngay" button
     const buyButton = document.createElement('button');
     buyButton.classList.add('buy-btn');
-    buyButton.classList.add(index); // Consider using dataset instead
+    buyButton.classList.add(index);
     buyButton.textContent = "Đọc Ngay";
     footer.appendChild(buyButton);
 
     // Append footerBooks to the card
     bookCard.appendChild(footer);
 
-    // ✅ Create action buttons container (edit/delete)
+    // ✅ Create action buttons container (Edit/Delete)
     const actions = document.createElement('div');
     actions.classList.add('book-actions');
 
-    // ✏️ Edit button
+    // ✏️ Edit button with icon
     const editBtn = document.createElement('button');
     editBtn.classList.add('edit-btn');
     editBtn.dataset.id = index;
-    editBtn.textContent = '✏️ Sửa';
+    editBtn.innerHTML = '<i class="far fa-edit"></i>';
 
-    // 🗑️ Delete button
+    // 🗑️ Delete button with icon
     const deleteBtn = document.createElement('button');
     deleteBtn.classList.add('delete-btn');
     deleteBtn.dataset.id = index;
-    deleteBtn.textContent = '🗑️ Xoá';
+    deleteBtn.innerHTML = '<i class="far fa-trash-alt"></i>';
 
-    // Append buttons to actions container
+    // Append both buttons to actions container
     actions.appendChild(editBtn);
     actions.appendChild(deleteBtn);
 
-    // Append actions container to card
+    // Append actions to book card
     bookCard.appendChild(actions);
 
-    // Finally, append to the grid
+    // Finally, append the book card to the grid
     const bookGrid = document.querySelector('.book-grid');
     bookGrid.appendChild(bookCard);
 }
+
 
 function formatNumberWithDots(number) {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
