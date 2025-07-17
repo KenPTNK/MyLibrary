@@ -2,13 +2,12 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Trang Sản Phẩm - Sách</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Euler Library</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="./style/product.css">
-    <link rel="stylesheet" href="./style/style.css">
-    <link rel="stylesheet" href="./style/edit.css">
+    <link rel="stylesheet" href="./style/style.css" />
+    <link rel="stylesheet" href="./style/user.css">
 </head>
 
 <body>
@@ -34,18 +33,11 @@
         </div>
     </header>
 
-    <div id="product-root"></div>
-    <div id="edit-modal" class="modal" style="display:none;">
-        <div class="modal-content">
-            <h3 id="modal-title">Chỉnh sửa</h3>
-            <input id="modal-input" type="text" placeholder="" />
-            <div class="modal-buttons">
-                <button id="modal-save">Lưu</button>
-                <button id="modal-cancel">Huỷ</button>
-            </div>
+    <section class="container user-grid">
+        <h2>Quản lý người dùng</h2>
+        <div id="user-list" class="user-list">
         </div>
-    </div>
-
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -55,7 +47,7 @@
     <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-auth-compat.js"></script>
     <script src="./main/main.js"></script>
-    <script src="./main/edit.js"></script>
+    <script src="./main/user.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,121 @@
+/* Container styling */
+.container.user-grid {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Section title */
+.container.user-grid h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 8px;
+}
+
+/* Grid layout for user list */
+.user-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+/* Main user card */
+.user-card {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.user-card:hover {
+    transform: translateY(-4px);
+}
+
+/* User info */
+.user-card h3 {
+    font-size: 20px;
+    color: #007bff;
+    margin-bottom: 8px;
+}
+
+.user-card p {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 6px;
+}
+
+/* Books section */
+.user-books {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+/* Rented book item */
+.rented-book-item {
+    background: #f5f8fa;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.rented-book-item h4 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.rented-book-item p {
+    font-size: 13px;
+    margin: 2px 0;
+    color: #555;
+}
+
+/* Row containing username + delete button */
+.user-name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+/* Row containing book title + delete button */
+.book-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+/* Delete buttons flush right */
+.delete-user-btn,
+.delete-book-btn {
+    margin-right: 0;
+    /* stick to the right */
+    cursor: pointer;
+    color: #dc3545;
+    transition: color 0.2s;
+}
+
+.delete-user-btn:hover,
+.delete-book-btn:hover {
+    color: #a71d2a;
+}
+
+/* Optional: adjust icon size */
+.delete-user-btn {
+    font-size: 1.1rem;
+}
+
+.delete-book-btn {
+    font-size: 1rem;
+}
