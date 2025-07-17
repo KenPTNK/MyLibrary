@@ -36,10 +36,45 @@ manualForm.addEventListener('submit', async (e) => {
         return;
     }
 
+    let saleability = '';
+
+    // Check if the price > 0
+    if (price < 0) {
+        alert("Giá sách phải lớn hơn 0.");
+        return;
+    } else if (price === 0) {
+        saleability = 'FREE';
+    } else {
+        saleability = 'FOR_SALE';
+    }
+
+    // Check if the book already exists in Firestore
+    const existingBooks = await db.collection('books').where('data.volumeInfo.title', '==', title).get();
+    if (!existingBooks.empty) {
+        alert("Sách này đã tồn tại trong cơ sở dữ liệu.");
+        return;
+    }
+
     try {
         await db.collection('books').add({
-            title, author, description, price, imgLink, previewLink,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            data:{
+                volumeInfo: {
+                    authors: [author],
+                    description: description,
+                    imageLinks: {
+                        thumbnail: imgLink,
+                    },
+                    previewLink: previewLink,
+                    title: title
+                },
+                saleInfo: {
+                    retailPrice: {
+                        amount: price,
+                        currencyCode: 'VND'
+                    },
+                    saleability: 'FOR_SALE'
+                }
+            }
         });
         alert("📚 Sách đã được thêm thành công!");
         manualForm.reset();
@@ -80,3 +115,5 @@ idForm.addEventListener('submit', async (e) => {
         alert("Không thể lấy dữ liệu sách. Kiểm tra ID.");
     }
 });
+
+// 
