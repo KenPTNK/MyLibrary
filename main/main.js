@@ -78,6 +78,25 @@ function reload() {
     });
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    const hello = document.getElementsByClassName("promo-btn")[0]; // lấy phần tử đầu tiên
+    if (!hello) return;
+
+    hello.addEventListener("click", (e) => {
+        e.preventDefault(); // ngăn chuyển trang mặc định
+
+        const userData = localStorage.getItem('userData');
+        const parsedUser = userData ? JSON.parse(userData) : null;
+
+        if (!parsedUser) {
+            alert('Vui lòng đăng nhập để truy cập trang cá nhân.');
+        } else {
+            window.location.href = './account.html';
+        }
+    });
+});
+
+
 // https://www.googleapis.com/books/v1/volumes?q=tên cái này là gọi theo tên điền cái tên vào là ra
 // https://www.googleapis.com/books/v1/volumes/id cái này là gọi theo id 
 

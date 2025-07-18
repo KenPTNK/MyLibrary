@@ -5,26 +5,10 @@ function createUserCard(name, email) {
     // --- User row ---
     const nameRow = document.createElement('div');
     nameRow.className = 'user-name-row';
+
     const nameEl = document.createElement('h3');
     nameEl.textContent = name;
-
-    const userDeleteBtn = document.createElement('i');
-    userDeleteBtn.className = 'far fa-trash-alt delete-user-btn';
-    userDeleteBtn.title = 'Xóa người dùng';
-    userDeleteBtn.addEventListener('click', () => {
-        if (!confirm(`Bạn có chắc muốn xóa tài khoản "${name}"?`)) return;
-        db.collection('username').where('username', '==', name).get()
-            .then(snap => {
-                snap.forEach(doc => {
-                    doc.ref.delete()
-                        .then(() => { alert('Tài khoản đã được xóa!'); window.location.reload(); })
-                        .catch(err => console.error('Error removing user:', err));
-                });
-            })
-            .catch(err => console.error('Error querying users:', err));
-    });
-
-    nameRow.append(nameEl, userDeleteBtn);
+    nameRow.append(nameEl);
     card.appendChild(nameRow);
 
     // --- Email ---
@@ -49,7 +33,7 @@ function createUserCard(name, email) {
             const userDoc = userSnap.docs[0];
             userDoc.ref.collection('rentedBooks').get()
                 .then(bookSnap => {
-                    booksContainer.innerHTML = ''; // now safe: no listeners to lose
+                    booksContainer.innerHTML = '';
                     if (bookSnap.empty) {
                         booksContainer.textContent = 'Tài khoản chưa mua sách.';
                         return;
@@ -60,7 +44,6 @@ function createUserCard(name, email) {
                         const bookItem = document.createElement('div');
                         bookItem.className = 'rented-book-item';
 
-                        // Title row
                         const titleRow = document.createElement('div');
                         titleRow.className = 'book-title-row';
 
@@ -83,7 +66,6 @@ function createUserCard(name, email) {
                         titleRow.append(titleEl, bookDeleteBtn);
                         bookItem.appendChild(titleRow);
 
-                        // Other info
                         ['price', 'address', 'quantity'].forEach(field => {
                             const p = document.createElement('p');
                             let label = '';

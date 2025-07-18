@@ -108,55 +108,69 @@ function updateAccountBalance(amount) {
 }
 
 // Event listener for the "Mua ngay" button
-document.querySelector('.buttons .buy-btn').addEventListener('click', () => {
-  if (!userData) {
-    alert('Vui lòng đăng nhập để thực hiện giao dịch.');
-    return;
-  }
-  const address = document.querySelector('.address-input textarea').value.trim();
-  if (address === '') {
-    alert('Vui lòng nhập địa chỉ giao hàng.');
-    return;
-  }
-
-  if (price === 'Miễn Phí') {
-    alert('Cảm ơn bạn đã chọn sách miễn phí!');
-  } else if (price === 'Không có sẵn') {
-    alert('Sách này hiện không có sẵn để mua.');
-  } else {
-    // check if user has enough balance
-    const balanceText = document.getElementById('account-balance').textContent;
-    const balance = parseInt(balanceText.replace(/[^0-9]/g, ''), 10);
-    const quantity = parseInt(document.getElementById('quantity-input').value, 10);
-    if (balance < parseInt(price.replace(/[^0-9]/g, ''), 10) * quantity) {
-      alert('Số dư tài khoản không đủ để thực hiện giao dịch.');
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelector('.buttons .buy-btn').addEventListener('click', () => {
+    const parsedUser = userData ? JSON.parse(userData) : null;
+    if (!parsedUser) {
+      alert('Vui lòng đăng nhập để thực hiện giao dịch.');
       return;
     }
-    const amount = parseInt(price.replace(/[^0-9]/g, ''), 10) * quantity;
-    updateAccountBalance(amount);
-    db.collection("username").get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        if (doc.data().username === username) {
-          const rentedBook = {
-            name: title,
-            price: price,
-            address: address,
-            quantity: quantity,
-          };
-          db.collection("username")
-            .doc(doc.id)
-            .collection("rentedBooks")
-            .add(rentedBook)
-            .then(() => {
-              console.log("Book saved to rentedBooks.");
-            })
-            .catch((error) => {
-              console.error("Error saving rented book: ", error);
-            });
-        }
-      });
-    });
-    alert('Cảm ơn bạn đã mua sách! Địa chỉ giao hàng của bạn là: ' + address);
-  }
-});
+    const address = document.querySelector('.address-input textarea').value.trim();
+    if (address === '') {
+      alert('Vui lòng nhập địa chỉ giao hàng.');
+      return;
+    }
 
+    if (price === 'Miễn Phí') {
+      alert('Cảm ơn bạn đã chọn sách miễn phí!');
+
+    } else if (price === 'Không có sẵn') {
+      alert('Sách này hiện không có sẵn để mua.');
+    } else {
+      // check if user has enough balance
+      const balanceText = document.getElementById('account-balance').textContent;
+      const balance = parseInt(balanceText.replace(/[^0-9]/g, ''), 10);
+      const quantity = parseInt(document.getElementById('quantity-input').value, 10);
+      if (balance < parseInt(price.replace(/[^0-9]/g, ''), 10) * quantity) {
+        alert('Số dư tài khoản không đủ để thực hiện giao dịch.');
+        return;
+      }
+      const amount = parseInt(price.replace(/[^0-9]/g, ''), 10) * quantity;
+      updateAccountBalance(amount);
+      db.collection("username").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (doc.data().username === username) {
+            // check if the user had used the same book?
+            db.collection("username").doc(doc.id).collection("rentedBooks").get().then((rentedSnap) => {
+              let duplicate = false;
+              rentedSnap.forEach((rbDoc) => {
+                const rb = rbDoc.data();
+                if (rb.name === title && rb.price === price && rb.address == address) {
+                  const newQuantity = rb.quantity + quantity; // cộng thêm số lượng mua
+                  alert("Bạn đã mua sách này rồi. Số lượng đã được cập nhật.");
+                  db.collection("username").doc(doc.id).collection("rentedBooks").doc(rbDoc.id).update({ quantity: newQuantity });
+                  duplicate = true;
+                }
+              });
+              if (!duplicate) {
+                const rentedBook = {
+                  name: title,
+                  price: price,
+                  address: address,
+                  quantity: quantity,
+                };
+                db.collection("username").doc(doc.id).collection("rentedBooks").add(rentedBook).then(() => {
+                  console.log("Book saved to rentedBooks.");
+                })
+                  .catch((error) => {
+                    console.error("Error saving rented book: ", error);
+                  });
+              }
+            });
+          }
+        });
+      });
+      alert('Cảm ơn bạn đã mua sách! Địa chỉ giao hàng của bạn là: ' + address);
+    }
+  });
+});
