@@ -53,12 +53,21 @@ function createBookDiv(title, author, price, imgSrc, index) {
     deleteBtn.dataset.id = index;
     deleteBtn.innerHTML = '<i class="far fa-trash-alt"></i>';
     deleteBtn.addEventListener('click', function () {
-        db.collection("books").doc(index).delete().then(() => {
-            alert("Xoá thành công sách");
-            window.location.reload();
-        }).catch((error) => {
-            console.error("Error removing document: ", error);
-        });
+        const confirmed = confirm("Bạn có chắc chắn muốn xoá sách này không?");
+
+        if (confirmed) {
+            db.collection("books").doc(index).delete()
+                .then(() => {
+                    alert("Xoá thành công sách");
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.error("Error removing document: ", error);
+                });
+        } else {
+            // Optional: add a message or log if the user cancels
+            console.log("Hành động xoá đã bị huỷ.");
+        }
     });
 
     // Append both buttons to actions container
